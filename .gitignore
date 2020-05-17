@@ -1,3 +1,5 @@
-# Ada Library Information
-bin
-obj
+﻿#這是注解
+MyMVC/bin
+MyMVC/obj
+packages
+.vs/ 

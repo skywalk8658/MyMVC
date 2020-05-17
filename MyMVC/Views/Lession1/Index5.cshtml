@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MyMVC.Models.Album>
+@using MyMVC.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index5</title>
+</head>
+<body>
+    <h3>使用ViewData的Model屬性，在View頁面指定強型別 見第一行宣告 @@model IEnumerab &lt;MyMVC.Models.Album&gt; </h3>
+    <b>第二行宣告引用Models型別,使用@@using關鍵字，因此foreach可以直接使用Album類別</b><br />
+    <ul>
+        @foreach (Album p in Model)
+        {
+            <li>"Title = " @p.Title</li>
+        }
+    </ul>
+
+    <h3>使用ViewBag再傳遞另一個模型 MyMVC.Models.Artist</h3>
+    @foreach (MyMVC.Models.Artist a in (ViewBag.Artists as IEnumerable<MyMVC.Models.Artist>))
+    {
+        <li>"Name = " @a.Name</li>
+    }
+
+    <h3>經常在View中使用的命名空間，可以在View目錄下的Web.config文件中宣告如下</h3>
+       &lt;add namespace="MyMVC.Models"/&gt;
+</body>
+</html>

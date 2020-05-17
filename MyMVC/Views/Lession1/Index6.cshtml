@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index6</title>
+</head>
+<body>
+    <h3>使用Razor語法</h3>
+     <ul>
+         <li> <h4>Razor中的核心標記符號是(@@)，稱為"at"  </h4>
+         <li> <h4>代碼可能出現有二義性的情況，使用顯性表達式 用小括號()括起來  </h4>
+             <div>
+                 例如下語法<br />
+                 @@{ 
+                      string rootNamespace = "MyApp";
+                  }<br />
+                  &lt;span&gt; @@rootNamespace.Models  &lt;span&gt; <br />
+                  這個例子想要輸出的結果是<br />
+                  &lt;span&gt; MyApp.Models  &lt;span&gt; <br />
+                 此情況反而出現錯誤，Razor會認為@@rootNamespace.Models 是代碼表達式<br />
+                 因此可以小括號來使用顯式表達式 如下<br />
+                 &lt;span&gt; @@(rootNamespace).Models &lt;/span&gt;
+             </div>
+            </li>
+         <li><h4>使用兩個@@@@ 轉義@@符號 </h4>
+             ex:想要顯示 @@Haacke會失敗，使用@@@@符號來轉義
+         </li>
+         <li><h4>Razor表達式是用HTML自動編碼 </h4>
+             例如下語法將不會彈出一個警告對話框，而會呈現編碼的HTML<br />
+             @@ {<br />
+             string message =  "&lt;script&gt; alert('haacked!');  &lt;/script&gt;" <br />
+             }<br />
+
+             @{
+                 string message = "<script> alert('haacked!!!');  </script>";
+             }<br />
+             <span> 編碼的字串 =   @message</span><br />
+             <span> 使用@Html.Raw 讓字串不編碼 =  @@Html.Raw(message)  </span><br />
+         </li>
+
+         <li><h4>在javascript中顯示Razor的值，要使用JavaScript字串編碼，可以有效避免XSS功擊</h4>
+            ex:<br />
+            var message = 'Hello @@Ajax.JavaScriptStringEncode(ViewBag.B)';<br />
+            $("#message").html(message).show('slow');<br />
+        </li>
+         <li><h4>Razor的代碼區塊有兩種</h4>
+             <P>
+                 單行區塊用@@開頭接識別字<br />
+                 ex: @@foreach(var item in Orders){ The order is @@item};<br />
+             </P> 
+             多行區塊用@@{}，在大括號內的都算 <br />
+             ex:<br />
+               @@{ <br />
+                string s= "one line of code"; <br />
+                ViewBag.Title="Another line of code"; <br />
+               }<br />
+         </li>
+         <li><h4>隱式代碼表達式-採用THML編碼</h4>
+             &lt;span&gt; Razor: @@model.Message  &lt;/span&gt; <br />
+         </li>
+         <li>
+             <h4>顯式代碼表達式-使用小括號</h4>
+             &lt;span&gt; Razor: ISBN@@(isbn) &lt;/span&gt; <br />
+         </li>
+         <li>
+             <h4>無編碼代碼表達式-不採用HTML編碼的值，使用Html.Raw確保不被編碼</h4>
+             &lt;span&gt; Razor: @@Html.Raw(model.Message) &lt;/span&gt; <br />
+         </li>
+         <li>
+             <h4>本文和標記相結合</h4>
+             <P>
+                 @@foreach(var item in Orders){<br />
+                    The order is @@item<br />
+                 }<br />
+             </P>           
+         </li>
+         <li>
+             <h4>混合代碼和純本文</h4>
+             <P>
+                 下面展示在一個條件語句塊中顯示純本文<br />
+                 第一種: 只將標籤內容寫到回應Response中，標籤本身不寫入
+                 @@if(showMesage){ <br />
+                 &lt;text&gt; This is plain text &lt;/text&gt; <br />
+                 };<br />
+                 第二種: 使用特殊語法@@:<br />
+                 @@if(showMesage){ <br />
+                   @@:This is plain text.<br />
+                 }<br />
+             </P>
+         </li>
+         <li>
+             <h4>服務器端的注解符號 - 使用@@* ... *@@ 進行多行注解</h4>
+             <P>
+                 @@*<br />
+                   This is a multiline server side comment <br />
+                   Server Name = ViewBag.Name <br />
+                  *@@ <br />
+             </P>
+         </li>
+         <li>
+             <h4>調用泛型方法 - 尖括號會導至Razor轉回標記，因此要用顯示表達式，以小括號括起來</h4>
+                @@(Html.SomeMethod&lt;AType&gt; )<br />
+         </li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+         <li><h4></h4></li>
+
+         <li><h4></h4></li>
+     </ul>
+</body>
+</html>

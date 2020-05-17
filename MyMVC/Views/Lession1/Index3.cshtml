@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index3</title>
+    </head>
+    <body>
+        <h2> 從controller 傳遞數據到View 畫面</h2>
+
+        ViewData : @ViewData["A"] <br />
+        ViewBag : @ViewBag.B  <br />
+    TempData["C"]第一次顯示: @TempData["C"] <br />
+   
+    <div>
+    </div>
+
+        @{
+            var collection = new List<string>() { "王小華", "李大明", "陳小雪" };
+        }
+        <ul>
+          @foreach (var item in collection)
+          {
+            <li> 姓名：@item </li>
+          }
+             
+         </ul>
+        @Html.Label("使用ViewData的姓名：")
+        @Html.TextBox("name1", ViewData["Name"])<br />
+
+        @Html.Label("使用ViewBag的姓名，要轉型：")
+        @Html.TextBox("name2", (string)ViewBag.Name)<br />
+ 
+       
+
+           
+</body>
+</html>

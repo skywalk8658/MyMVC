@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index4 - 強類型View part1</title>
+</head>
+<body>
+    <h2> 強類型View part1</h2>
+
+    <h3>ViewBag不指定型別</h3>
+    <ul>
+        @foreach (dynamic a in ViewBag.Albums) {
+            <li>"Title = " @a.Title</li>
+        }
+    </ul>
+    <h3>ViewBag指定型別 IEnumerable<MyMVC.Models.Album> 或 List<MyMVC.Models.Album></h3>
+    <ul>
+        @*@foreach (MyMVC.Models.Album a in (ViewBag.Albums as List<MyMVC.Models.Album>))
+        {
+            <li>"Title = " @a.Title</li>
+        }*@
+
+        @foreach (MyMVC.Models.Album a in (ViewBag.Albums as IEnumerable<MyMVC.Models.Album>))
+        {
+            <li>"Title = " @a.Title</li>
+        }
+    </ul>
+    <div> 
+    </div>
+</body>
+</html>

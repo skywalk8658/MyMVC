@@ -1,0 +1,18 @@
+﻿
+@{
+    Layout = "~/Views/Lession1/SiteLayout.cshtml";
+    ViewBag.Title = "Index7 佈局";
+
+}
+
+<p> 這是 Layout 佈局的主內容</p>
+<h3>_ViewStart.cshtml是一個專案產生後預設的最上層layout，所有View頁面都會套用，但個別指定layout位置，<br />
+    將會改寫父Layout的設定，它的位置在 Views資料夾下面</h3>
+
+@section Footer {
+   <strong>這是index7 View的 footer</strong><br />
+   這是使用@@section語法為佈局中定義的一個節點指定內容 
+}
+
+
+
