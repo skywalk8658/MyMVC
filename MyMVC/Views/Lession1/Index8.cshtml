@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index8</title>
+</head>
+<body>
+    <h2>使用@@using (Html.BeginForm())來生成表單Form</h2>
+    <h3>#因為class是保留字，不能用作屬性名稱或標識符，需在前面加一個@@符號作為前置詞</h3>
+    <h3>#屬性設定帶有連字符的名稱(ex:data-val)，要轉換成底線連字符(data_val)</h3>
+    @using (Html.BeginForm("Index81", "Lession1", FormMethod.Post
+        , new {target ="_blank", @class = "editForm", data_val=true } ))
+    {
+        <span>查詢條件：</span> 
+        <input type="text" name="q" value="" /><br />
+        <input type="submit" value="Search" /><br /><br />
+        <div>
+            <h3>下面的Html輔助方法，生成textarea 會自動 Html編碼</h3>   
+            @Html.TextArea("text", "Hello <br /> world !");
+        </div>
+
+
+    }
+
+</body>
+</html>

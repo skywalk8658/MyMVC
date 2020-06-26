@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BankCode>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexBank1</title>
+</head>
+<body>
+     <p>@Html.ActionLink("Create New","Create")</p>
+    <table>
+        <tr>
+
+            <th>@Html.DisplayNameFor(model => model.BankId) </th>
+            <th>@Html.DisplayNameFor(model => model.BankName) </th>
+            <th>@Html.DisplayNameFor(model => model.BankNo) </th>
+            <th>管理</th>
+
+        </tr>
+     @foreach (var item in Model){
+      <tr>
+          <td>@Html.DisplayFor(modelItem => item.BankId)</td>
+          <td>@Html.DisplayFor(modelItem => item.BankName)</td>
+          <td>@Html.DisplayFor(modelItem => item.BankNo)</td>
+          <td>
+              @Html.ActionLink("編輯","Edit", new {id=item.BankId })
+              @Html.ActionLink("明細", "Details", new { id = item.BankId })
+              @Html.ActionLink("刪除", "Delete", new { id = item.BankId })
+
+          </td>
+      </tr>
+
+     }
+
+    </table>
+
+</body>
+</html>

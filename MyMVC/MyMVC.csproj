@@ -277,9 +277,14 @@
     <Content Include="Views\Lession1\SiteLayout.cshtml" />
     <Content Include="Views\Lession1\Index71.cshtml" />
     <Content Include="Views\Lession1\Index72.cshtml" />
+    <Content Include="Views\Lession1\IndexBank1.cshtml" />
+    <Content Include="Views\Lession1\Index8.cshtml" />
+    <Content Include="Views\Lession1\Index81.cshtml" />
+    <Content Include="Views\Lession1\Index9.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DLL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

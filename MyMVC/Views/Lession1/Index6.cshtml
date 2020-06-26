@@ -41,7 +41,7 @@
                  string message = "<script> alert('haacked!!!');  </script>";
              }<br />
              <span> 編碼的字串 =   @message</span><br />
-             <span> 使用@Html.Raw 讓字串不編碼 =  @@Html.Raw(message)  </span><br />
+             <span> 使用@Html.Raw 讓字串不編碼 =  @@Html.Raw(@message)  </span><br />
          </li>
 
          <li><h4>在javascript中顯示Razor的值，要使用JavaScript字串編碼，可以有效避免XSS功擊</h4>
@@ -52,7 +52,7 @@
          <li><h4>Razor的代碼區塊有兩種</h4>
              <P>
                  單行區塊用@@開頭接識別字<br />
-                 ex: @@foreach(var item in Orders){ The order is @@item};<br />
+                 ex: @@foreach(var item in Orders)<br />{)<br /> The order is @@item)<br />};<br />
              </P> 
              多行區塊用@@{}，在大括號內的都算 <br />
              ex:<br />
@@ -71,6 +71,12 @@
          <li>
              <h4>無編碼代碼表達式-不採用HTML編碼的值，使用Html.Raw確保不被編碼</h4>
              &lt;span&gt; Razor: @@Html.Raw(model.Message) &lt;/span&gt; <br />
+             <div>
+                 無編碼=@Html.Raw(@ViewData["Msg"])
+             </div>
+             <div> 
+                 有編碼=@ViewData["Msg"]
+             </div>
          </li>
          <li>
              <h4>本文和標記相結合</h4>
@@ -84,7 +90,7 @@
              <h4>混合代碼和純本文</h4>
              <P>
                  下面展示在一個條件語句塊中顯示純本文<br />
-                 第一種: 只將標籤內容寫到回應Response中，標籤本身不寫入
+                 第一種: 只將標籤內容寫到回應Response中，標籤本身不寫入<br />
                  @@if(showMesage){ <br />
                  &lt;text&gt; This is plain text &lt;/text&gt; <br />
                  };<br />

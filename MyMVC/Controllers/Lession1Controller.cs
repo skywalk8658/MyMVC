@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyMVC.Models;
 
 namespace MyMVC.Controllers
 {
@@ -102,6 +103,7 @@ namespace MyMVC.Controllers
 
         public ActionResult Index6()
         {
+            ViewBag.Msg = "<script>alert('無編碼代碼表達式!');</script>";
             //Razor語法
             return View();
         }
@@ -121,8 +123,78 @@ namespace MyMVC.Controllers
         public ActionResult Index72()
         {
             //布局 SiteLayout.cshtml 使用Partial View 
-            ViewBag.Message = "這是載入index72 部份視圖的Message文字內容!!!";
+            ViewBag.Message = "這是載入Index72 部份視圖的ViewBag.Message文字內容!!!";
             return View();
+        }
+
+        List<BankCode> listBank = new List<BankCode> {
+                new BankCode() { BankId=1001, BankName="中國信托", BankNo="810" }
+               ,new BankCode() { BankId=1002, BankName="台新銀行", BankNo="820" }
+               ,new BankCode() { BankId=1003, BankName="花旗銀行", BankNo="830" }
+            };
+
+        public ActionResult IndexBank1()
+        {
+            List<BankCode> list = null;
+            if (Session["Bank"] == null)
+                Session["Bank"] = list = listBank;
+            else
+                list = Session["Bank"] as List<BankCode>;
+
+            Session["Bank"] = list = list.Count == 0  ? listBank : list;//若是都沒資料，就重新給
+            return View(list);
+        }
+
+        public ActionResult Delete(int id = 1003)
+        {
+            List<BankCode> list = null;
+            if (Session["Bank"] == null)
+                Session["Bank"] = listBank;
+            else
+                list = Session["Bank"] as List<BankCode>;
+
+            var item = from b in list
+                       where b.BankId.Equals(id)
+                       select b;
+            list.Remove(item.FirstOrDefault());
+            Session["Bank"] = list;
+
+            return RedirectToAction("IndexBank1");
+            //return View("IndexBank1");
+        }
+
+        public ActionResult Index8()
+        {
+            ViewBag.Message = "Index8";
+            return View();
+        }
+
+        public ActionResult Index81()
+        {
+            ViewBag.QMsg = Request["q"];
+            return View();
+        }
+
+        public ActionResult Index9()
+        {
+            //Html.BeginForm
+            //Html.ValidationSummary
+            ModelState.AddModelError("", "這是模型級別的錯誤!");
+            //增加一個Title屬性的錯誤
+            ModelState.AddModelError("Title", "這是與Title屬性相關聯的錯誤!");
+            //Html.TextBox("Price")自動繫結ViewBag.Price
+            ViewBag.Price = 95.7;
+            ViewBag.Album = new Album { Price = 23 };
+            SelectListItem item = new SelectListItem() { Text= "Apple", Value="apple" };
+            IList<SelectListItem> list = new List<SelectListItem>() {
+                new SelectListItem() { Text= "Apple", Value="apple"}
+               ,new SelectListItem() { Text= "Orange", Value="orange"}
+             };
+            
+            ViewBag.Genres = new SelectList(list, "Value", "Text");
+
+            var artist = new Artist { Name = "習大大的強型別", ArtistId=2134 };
+            return View(artist);
         }
     }
 }

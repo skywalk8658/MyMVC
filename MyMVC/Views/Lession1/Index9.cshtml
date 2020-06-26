@@ -1,0 +1,91 @@
+﻿@model MyMVC.Models.Artist
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index9</title>
+</head>
+<body>
+    <h2>Html.BeginForm()預設生成為 &lt;form action="/Lession1/Index9" method="post"&gt;的表單 </h2>
+    <h3>Html.ValidationSummary可以顯示ModelState中所有驗證錯誤的訊息，使用excludePropertyErrors:true排除屬性級別的錯誤</h3>
+    <h3>HTML輔助方法：Html.Label,Html.DropDownList,Html.TextBox</h3>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(excludePropertyErrors:true)
+        //顯示所有級別錯誤
+        @*@Html.ValidationSummary()*@
+        <fieldset>
+            <legend>Edit Album</legend>
+            <p>
+               @Html.Label("GenreId")
+               @Html.DropDownList("Genreid",ViewBag.Genres as SelectList)
+            </p>
+            <p>
+                @Html.Label("Title")
+                @Html.TextBox("Title", "預設輸入標題")<br />
+                @Html.ValidationMessage("Title")<br /><br />
+                <h3>ViewBag.Price 字串繫結的TextBox輔助方法</h3>
+                @Html.TextBox("Price")<br />
+                <h3>ViewBag.Album 物件繫結的TextBox輔助方法</h3>
+                @Html.TextBox("Album.Price")<br />
+
+                <h3>使用View(artist)繫結的TextBox輔助方法</h3>
+                @Html.TextBox("Name")<br />
+                <h3>使用強型別輔助@model MyMVC.Models.Artist-顯式表達值是比較好的方式，強型別繫結的TextBox輔助方法</h3>
+                @Html.TextBox("ShowName",Model.Name)<br />
+                <h3>使用強型別輔助@model MyMVC.Models.Artist-使用lambda表達式指定，HTML輔助方法名稱要有For後置詞</h3>
+                @Html.LabelFor(m => m.ArtistId)
+                @Html.DropDownListFor(m => m.ArtistId , ViewBag.Genres as SelectList)
+
+                <h2>模板輔助方法</h2>
+                <h3>模板輔助方法:Html.Display、Html.Editor</h3>
+                <h3>模板輔助方法:強型別 Html.DisplayFor、Html.EditorFor</h3>
+                <h4>輸出@@Html.EditorFor(m => m.ArtistId)</h4>
+                   @Html.EditorFor(m => m.ArtistId)
+
+                <h3>模板輔助方法可以使用數據注解來改變生成的HTML，EditorFor自動生成合適的任何編輯器，要在Name屬性增加一個DataType注解</h3>
+                <h4>增加一個多行文字輸入型別[DataType(DataType.MultilineText)]，輸出@@Html.EditorFor(m => m.Name)</h4>
+                   @Html.EditorFor(m => m.Name)
+
+                <h3>其他Html輔助方法-Html.Hidden</h3>
+                    @Html.Hidden("HidOrderNo","HO200625001")
+                <h3>其他Html輔助方法-Html.Password</h3>
+                    @Html.Password("Pwd")
+                <h3>其他Html輔助方法-Html.RadioButton</h3>
+                    @Html.RadioButton("color","red")
+                @Html.RadioButton("color", "blue",true)
+                @Html.RadioButton("color", "green")
+
+                <h3>其他Html輔助方法-Html.CheckBox，會產生兩個元素，因為HTML規範瀏覽器只提交有選中的元素的值，
+                     二個元素保證有一個值會被提交，即便沒有選擇</h3>
+                @Html.CheckBox("IsDiscounted")
+
+                <h3>其他Html輔助方法-Html.ActionLink</h3>
+                <h4>Html.ActionLink，不指定Control</h4>
+                   @Html.ActionLink("連結到Index8", "Index8")
+                <h4>Html.ActionLink，指定Control</h4>
+                @Html.ActionLink("連結到關於說明", "About", "Home")
+                <h4>Html.ActionLink，指定URL傳遞一個參數值(q) <h4>
+                @Html.ActionLink("連結到Index81", "Index81" ,new { q="SSD最便宜" },null)
+
+                <h3>其他Html輔助方法-Html.RouteLink，只可接收路由名稱，不能接收控制名稱和操作名稱</h3>
+                    @Html.RouteLink("連結到自已-使用路由名稱", "OtherPath")<br />
+                    @Html.RouteLink("連結到Index8-指定Action", new {action= "Index81" })
+
+                <h3>其他Html輔助方法-URL輔助方法，不是返回元素，以字串的內容返回URL，有三種</h3>
+                <h4>Html.ActionLink，不指定Control</h4>
+                @Url.Action("Index81","Lession1", new { q="查詢筆電"},null)
+            </p>
+            <input type="submit" value="Save" />
+        </fieldset>
+
+    }
+</body>
+</html>

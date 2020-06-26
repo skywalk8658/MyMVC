@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyMVC.Models
 {
@@ -19,7 +20,12 @@ namespace MyMVC.Models
 
     public class Artist
     {
+
         public virtual int ArtistId { get; set; }
+
+        [Required(ErrorMessage ="Artist名稱欄位必填")]
+        [StringLength(15)]
+        [DataType(DataType.MultilineText)]
         public virtual string Name { get; set; }
     }
 
@@ -29,5 +35,13 @@ namespace MyMVC.Models
         public virtual string Name { get; set; }
         public virtual string Desc { get; set; }
         public virtual List<Album> Albums { get; set; }
+    }
+
+    public class BankCode
+    {
+        public virtual int BankId { get; set; }
+        public virtual string BankName { get; set; }
+        public virtual string BankNo { get; set; }
+
     }
 }

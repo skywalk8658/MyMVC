@@ -13,8 +13,13 @@
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 </head>
 <body>
-    <h1>@ViewBag.Title</h1>
-    <div id="main-content"> @RenderBody()  </div>
+    <h1>這是寫在SiteLayout.cshtml的標題 - @ViewBag.Title</h1>
+
+    <div id="main-content">
+        <strong>這是套用layout的View內容------------------start-----------------</strong>
+     @RenderBody()  
+        <strong>這是套用layout的View內容-------------------end-----------------</strong>
+    </div>
     <H3>第一個footer ，直接指定，因同一個layout無法同時載入兩次RenderSection("footer")，此程式已注解</H3>
     @*<footer>@RenderSection("footer")</footer>*@
 
