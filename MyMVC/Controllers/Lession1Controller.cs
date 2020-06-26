@@ -196,5 +196,50 @@ namespace MyMVC.Controllers
             var artist = new Artist { Name = "習大大的強型別", ArtistId=2134 };
             return View(artist);
         }
+
+        [ChildActionOnly]
+        public ActionResult Index91()
+        {
+            //設定ChildActionOnly屬性，避免通過URL來調用Index91操作，
+            //限制只能通過Action或RenderAction方法來調用子操作，像是顯示網站菜單
+            return PartialView();
+        }
+        [ChildActionOnly]
+        public ActionResult Index92(BankCode banks)
+        {
+            //PartialView 接收一個物件
+            return PartialView(banks);
+        }    
+
+        [ChildActionOnly]
+        [AcionName("AddBank")]
+        public ActionResult Index93()
+        {
+            //設定ChildActionOnly屬性，避免通過URL來調用Index91操作，
+            //限制只能通過Action或RenderAction方法來調用子操作，像是顯示網站菜單
+            return PartialView();
+        }    
+    
+        public ActionResult Index10()
+        {
+            //驗證和模型狀態
+            //模型狀態中存在錯誤，ModelState.IsValid會返回false，下面所有表達式都返回true
+            //ModelState.IsValid == false
+            //ModelState.IsValidField("Name") == false
+            //ModelState["Name"].Errors.Count > 0 
+            
+            //在模型狀態中查看驗證失敗錯誤訊息
+            //var ErrMsg= ModelState["Name"].Errors[0].ErrorMessage;
+
+            if(ModelState.IsValid)
+            {
+                //驗證成功後要處理的內容
+                string Msg="";
+
+            }
+            return PartialView();
+        }        
+
+
     }
 }
