@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index12-使用jQuery實現自動完成套件</title>
+</head>
+<body>
+    <h2>優化Web頁面性能-捆綁(bundling)及 微小(minification)</h2>
+    <h3>捆綁(bundling):將多個文件合併成一個文件下載，會在程式啟動時自動配置，
+      配置好的文件會儲存在App_start資料夾中的BundleConfig.cs檔, 像是如下</h3>
+   <p>
+        bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.js"));<br>
+
+        bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.validate*"));<br>
+
+        bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));<br>
+
+   </p>
+   <h4> 調用捆綁文件可以使用 Include</h4>
+      <p> 
+       @@Scripts.Render("~/bundles/jquery")</br>
+       @@Scripts.Render("~/bundles/jqueryval")</br>
+       @@Styles.Render("~/Content/css")</br>
+      </p>
+
+    <h3>微小(minification):壓縮文件大小</h3>
+    <p>使用jQuery查找帶有 data-autocomplete-source特性的元素</p>
+    <input type="text" name="q" data-autocomplete-source="@Url.Action("Index12_QuickSearch","Lession1")"/>
+
+    <script>
+      $("input[data-autocomplete-source]").each(function(){
+          var target = $(this);
+          target.autocomplete({ source:
+                target.attr("data-autocomplete-source") });
+      });
+    </script>
+    
+</body>
+</html>

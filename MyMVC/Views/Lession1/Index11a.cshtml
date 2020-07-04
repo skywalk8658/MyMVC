@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("Index81", "Lession1", FormMethod.Post
+    , new {target ="_blank", @class = "editForm", data_val=true } ))
+{
+    <span>查詢條件：</span> 
+    <input type="text" name="q" value="" /><br />
+    <input type="submit" value="Search" /><br /><br />
+    <div>
+        <h3>下面的Html輔助方法，生成textarea 會自動 Html編碼</h3>   
+        @Html.TextArea("text", "Hello <br /> world !");
+    </div>
+    
+}
+

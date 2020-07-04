@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index12-使用jQuery實現自動完成套件</title>
+</head>
+<body>
+    <h3>使用jQuery實現自動完成套件</h3>
+    <p>使用jQuery查找帶有 data-autocomplete-source特性的元素</p>
+    <input type="text" name="q" data-autocomplete-source="@Url.Action("Index12_QuickSearch","Lession1")"/>
+
+    <script>
+      $("input[data-autocomplete-source]").each(function(){
+          var target = $(this);
+          target.autocomplete({ source:
+                target.attr("data-autocomplete-source") });
+      });
+    </script>
+    
+</body>
+</html>

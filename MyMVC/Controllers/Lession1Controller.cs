@@ -128,9 +128,13 @@ namespace MyMVC.Controllers
         }
 
         List<BankCode> listBank = new List<BankCode> {
-                new BankCode() { BankId=1001, BankName="中國信托", BankNo="810" }
+                new BankCode() { BankId=1001, BankName="中國信托銀行", BankNo="810" }
                ,new BankCode() { BankId=1002, BankName="台新銀行", BankNo="820" }
                ,new BankCode() { BankId=1003, BankName="花旗銀行", BankNo="830" }
+               ,new BankCode() { BankId=1004, BankName="聯邦銀行", BankNo="840" }
+               ,new BankCode() { BankId=1005, BankName="永豐銀行", BankNo="850" }
+               ,new BankCode() { BankId=1006, BankName="土地銀行", BankNo="860" }
+               ,new BankCode() { BankId=1007, BankName="中國商業銀行", BankNo="870" }
             };
 
         public ActionResult IndexBank1()
@@ -169,7 +173,7 @@ namespace MyMVC.Controllers
             return View();
         }
 
-        public ActionResult Index81()
+        public ActionResult Index881()
         {
             ViewBag.QMsg = Request["q"];
             return View();
@@ -215,8 +219,9 @@ namespace MyMVC.Controllers
         [AcionName("AddBank")]
         public ActionResult Index93()
         {
-            //設定ChildActionOnly屬性，避免通過URL來調用Index91操作，
+            //設定ChildActionOnly屬性，避免通過URL來調用Index93操作，
             //限制只能通過Action或RenderAction方法來調用子操作，像是顯示網站菜單
+            //設定ActionName別名來調用action
             return PartialView();
         }    
     
@@ -238,7 +243,44 @@ namespace MyMVC.Controllers
 
             }
             return PartialView();
-        }        
+        }
+        
+        public ActionResult Index11()
+        {
+            //Ajax helper Ajax.ActionLink / Ajax.BeginForm
+            return View();
+        }
+        
+        public ActionResult Index11a()
+        {
+            //使用Ajax.ActionLink回傳的內容
+            return PartialView();
+        }                                 
+        public ActionResult Index11b()
+        {
+            //這是使用Ajax.BeginForm回傳的內容
+            ViewBag.SearchTxt = Request["q"];
+            return PartialView();
+        }
+
+        public ActionResult Index12_QuickSearch(string term)
+        {
+            //使用jQuery實現自動完成套件
+            // var banks= listBank.Where(a => a.BankName.Contains(term)).ToList().Select(a => new {Value = a.BankName});
+            var banks= listBank.Where(a => a.BankName.Contains(term)).Select(a => new {Value = a.BankName});
+            //MVC框架不允許使用Json回傳Http Get請求，為了回應Get請求的Json格，需要使用JsonRequestBehavior.AllowGet的設定
+            return Json(banks, JsonRequestBehavior.AllowGet);
+        }    
+
+        public ActionResult Index13()
+        {
+            //優化Web頁面性能
+            //捆綁(bundling):將多個文件合併成一個文件下載，
+            //會在程式啟動時自動配置，配置好的文件會儲存在App_start資料夾中的BundleConfig.cs檔
+            //微小(minification):壓縮文件大小
+            ViewBag.SearchTxt = Request["q"];
+            return PartialView();
+        }
 
 
     }

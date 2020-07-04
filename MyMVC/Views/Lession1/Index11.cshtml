@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index11-Ajax helper </title>
+
+    <script src='~/Scripts/_references.js'></script>
+</head>
+<body>
+    <h2>使用@@ActionLink 從Ajax取得的內容，移植到頁面中</h2>
+
+    <div id="dailynews">
+       @Ajax.ActionLink("點擊這個Ajax連結取得Index11a最新內容"
+                       ,"Index11a"
+                       ,new AjaxOptions{
+                         UpdateTargetId="dailynews",
+                         InsertionMode=InsertionMode.Replace,
+                         HttpMethod="GET"
+                       }
+                       )
+    </div>
+
+    <h2>使用@@using (Ajax.BeginForm) 使用表單Form取得Ajax回傳的內容(partialView或任何內容)</h2>
+    @using (Ajax.BeginForm("Index11b","Lession1",
+      new AjaxOptions {
+          InsertionMode=InsertionMode.Replace,
+          HttpMethod="GET",
+          OnFailure="searchFailed",
+          LoadingElementId="ajax-loader",
+          UpdateTargetId="searchresults",
+      }))
+      {
+          <input type="text" name="q" />
+          <input type="submit" value="search" />
+          <img id="ajax-loader" 
+               src="@~/Content/images/DSCF1820.JPG"
+               style="display:none" />
+      }
+      
+    
+</body>
+<script>
+   function searchFailed(){
+       $("#searchresults").html("抱歉，搜尋出了一些問題!");
+   }
+</script>
+</html>
