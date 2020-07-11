@@ -216,7 +216,7 @@ namespace MyMVC.Controllers
         }    
 
         [ChildActionOnly]
-        [AcionName("AddBank")]
+        [System.Web.Mvc.ActionName("AddBank")]
         public ActionResult Index93()
         {
             //設定ChildActionOnly屬性，避免通過URL來調用Index93操作，
@@ -280,6 +280,14 @@ namespace MyMVC.Controllers
             //微小(minification):壓縮文件大小
             ViewBag.SearchTxt = Request["q"];
             return PartialView();
+        }
+
+        //驗證輸入值
+        public System.Web.Mvc.JsonResult CheckUserName(string username)
+        {
+            //回傳一個布林值
+            var result = username == "David";
+            return Json(result, System.Web.Mvc.JsonRequestBehavior.AllowGet);
         }
 
 
