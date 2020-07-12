@@ -36,7 +36,7 @@ namespace MyMVC.Models
         [DataType(DataType.MultilineText)]//讓Html輔助器Editor自動生成特性為MultilineText
         [RegularExpression(@"[A-Za-z0-9._%+-]")]//使用正規表達示
         [System.Web.Mvc.Remote("CheckUserName","Account")]//remote可以調整Server端的函式執行驗證
-        [Display(Name="Artist Name")] //使用Editor輔助顯示的名稱
+        [Display(Name="藝術家名稱")] //使用Editor輔助顯示的名稱
         [ScaffoldColumn(false)] //讓EditorForModel及DisplayForModel不自動生成這個欄位
         public virtual string Name { get; set; }
 

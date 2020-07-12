@@ -1,19 +1,7 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model MyMVC.Models.BankCode
 
-<!DOCTYPE html>
+    <h3>這是 Index92 Partial View - Action要帶一個BankCode Model</h3>
+    
+    銀行名稱 = @Html.Label("BankName", Model.BankName)<br />
+    銀行代碼 = @Html.Label("BankNo", Model.BankNo)<br />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index92</title>
-</head>
-<body>
-    <h3>這是 Index92 Partial View</h3>
-    <div> 
-       
-    </div>
-</body>
-</html>

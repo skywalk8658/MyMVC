@@ -289,6 +289,16 @@
     <Content Include="Views\Friends\Details.cshtml" />
     <Content Include="Views\Friends\Edit.cshtml" />
     <Content Include="Views\Friends\Index.cshtml" />
+    <Content Include="Views\Lession1\Index91.cshtml" />
+    <Content Include="Views\Lession1\Index92.cshtml" />
+    <Content Include="Views\Lession1\Index93.cshtml" />
+    <Content Include="Views\Lession1\Index10.cshtml" />
+    <Content Include="Views\Lession1\Index11.cshtml" />
+    <Content Include="Views\Lession1\Index11a.cshtml" />
+    <Content Include="Views\Lession1\Index11b.cshtml" />
+    <Content Include="Views\Lession1\Index12.cshtml" />
+    <Content Include="Views\Lession1\Index13.cshtml" />
+    <Content Include="Views\Lession1\AddBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

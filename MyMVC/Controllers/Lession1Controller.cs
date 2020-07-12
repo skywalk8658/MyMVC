@@ -173,7 +173,7 @@ namespace MyMVC.Controllers
             return View();
         }
 
-        public ActionResult Index881()
+        public ActionResult Index81()
         {
             ViewBag.QMsg = Request["q"];
             return View();
@@ -185,14 +185,17 @@ namespace MyMVC.Controllers
             //Html.ValidationSummary
             ModelState.AddModelError("", "這是模型級別的錯誤!");
             //增加一個Title屬性的錯誤
-            ModelState.AddModelError("Title", "這是與Title屬性相關聯的錯誤!");
+            ModelState.AddModelError("Title", "這是與Title屬性相關聯的錯誤 !!!");
+            //增加一個Name屬性的錯誤
+            ModelState.AddModelError("Name", "Name姓名不可空白 !!!");
             //Html.TextBox("Price")自動繫結ViewBag.Price
             ViewBag.Price = 95.7;
             ViewBag.Album = new Album { Price = 23 };
-            SelectListItem item = new SelectListItem() { Text= "Apple", Value="apple" };
+            //SelectListItem item = new SelectListItem() { Text= "Apple", Value="apple" };
             IList<SelectListItem> list = new List<SelectListItem>() {
                 new SelectListItem() { Text= "Apple", Value="apple"}
                ,new SelectListItem() { Text= "Orange", Value="orange"}
+               ,new SelectListItem() { Text= "香蕉", Value="banana"}
              };
             
             ViewBag.Genres = new SelectList(list, "Value", "Text");
@@ -213,10 +216,10 @@ namespace MyMVC.Controllers
         {
             //PartialView 接收一個物件
             return PartialView(banks);
-        }    
+        }
 
         [ChildActionOnly]
-        [System.Web.Mvc.ActionName("AddBank")]
+        [System.Web.Mvc.ActionName("AddBank")]//設定ActionName原本Index93的 Action將無法使用
         public ActionResult Index93()
         {
             //設定ChildActionOnly屬性，避免通過URL來調用Index93操作，
