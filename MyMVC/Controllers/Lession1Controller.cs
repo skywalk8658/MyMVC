@@ -266,11 +266,11 @@ namespace MyMVC.Controllers
             return PartialView();
         }
 
-        public ActionResult Index12_QuickSearch(string term)
+        public ActionResult Index12(string Name)
         {
             //使用jQuery實現自動完成套件
             // var banks= listBank.Where(a => a.BankName.Contains(term)).ToList().Select(a => new {Value = a.BankName});
-            var banks= listBank.Where(a => a.BankName.Contains(term)).Select(a => new {Value = a.BankName});
+            var banks= listBank.Where(a => a.BankName.Contains(Name)).Select(a => new {Value = a.BankName});
             //MVC框架不允許使用Json回傳Http Get請求，為了回應Get請求的Json格，需要使用JsonRequestBehavior.AllowGet的設定
             return Json(banks, JsonRequestBehavior.AllowGet);
         }    
